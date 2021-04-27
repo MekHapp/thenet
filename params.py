@@ -1,4 +1,5 @@
 import argparse
+from server import server
 
 description = """
 Examples:
@@ -16,7 +17,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '-l',
     '--listen',
-    dest='listen connection',
+    dest='listen',
     help='Server listen <host>:<port>',
     action='store_true',
     default=False
@@ -24,17 +25,19 @@ parser.add_argument(
 parser.add_argument(
     '-e',
     '--execute',
+    dest='execute',
     help='Execute the file over connection'
 )
 parser.add_argument(
     '-t',
     '--target',
+    dest='target',
     help='ip direction to send data'
 )
 parser.add_argument(
     '-c',
     '--cmdshell',
-    dest='command shell',
+    dest='cmd_shell',
     help='insert commands',
     action='store_true',
     default=True
@@ -42,7 +45,8 @@ parser.add_argument(
 parser.add_argument(
     '-p',
     '--port',
-    help='Port connection' ,
+    dest='port',
+    help='Port connection',
     type=int,
     default=80,
 )
@@ -50,9 +54,19 @@ parser.add_argument(
 parser.add_argument(
     '-u',
     '--upload',
+    dest='upload_path',
     help='Upload file an write to destination' ,
-    type=int,
 )
 
 params = parser.parse_args()
 print('params', params)
+
+listen = params.listen
+execute = params.execute
+target = params.target
+cmd_shell = params.cmd_shell
+port = params.port
+up_path = params.upload_path
+
+if listen:
+    server(target, port)
