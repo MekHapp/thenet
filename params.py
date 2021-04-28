@@ -1,5 +1,8 @@
 import argparse
+import sys
+
 from server import server
+from client import client
 
 description = """
 Examples:
@@ -48,7 +51,7 @@ parser.add_argument(
     dest='port',
     help='Port connection',
     type=int,
-    default=80,
+    default=0,
 )
 
 parser.add_argument(
@@ -67,6 +70,13 @@ target = params.target
 cmd_shell = params.cmd_shell
 port = params.port
 up_path = params.upload_path
+
+if not listen and target and port > 0:
+    print('In client send stdin')
+    stdin = sys.stdin.read()
+    print(stdin)
+    client(target, port, stdin)
+
 
 if listen:
     server(target, port)

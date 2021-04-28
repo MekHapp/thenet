@@ -6,6 +6,8 @@ def server(target, port):
         target = "0.0.0.0"
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print('target', target)
+    print('port', port)
     server.bind((target, port))
     server.listen(5)
 
