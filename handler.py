@@ -1,4 +1,4 @@
-from .cmd import command as cmd
+from cmd import command as cmd
 
 class Handler:
 
@@ -6,7 +6,7 @@ class Handler:
     def __init__(self, cli_socket):
         self.cli = cli_socket
 
-    def client(self, upload_path, execute: str, command: str):
+    def client(self, upload_path: str, execute: str, command: str):
         if upload_path:
             file_buffer = ''
             while True:

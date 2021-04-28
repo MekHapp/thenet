@@ -1,6 +1,11 @@
 import socket
+from handler import Handler
 
-def server(target, port):
+def server(target, port, upload_path, execute, command):
+    print('Server')
+    print('Target', target, port)
+    print('path', upload_path)
+    print('execute cmd', execute, command)
 
     if not target:
         target = "0.0.0.0"
@@ -13,8 +18,10 @@ def server(target, port):
 
     while True:
         cli_socket, addr = server.accept()
+        handler = Handler(cli_socket)
+        print('Handler trhead object', handler)
         cli_thread = threading.Thread(
-            target=client_handler,
-            args=(cli_socket,)
+            target=handler.client,
+            args=(upload_path, execute, command,)
         )
         cli_thread.start()

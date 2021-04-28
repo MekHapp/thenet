@@ -77,6 +77,5 @@ if not listen and target and port > 0:
     print(stdin)
     client(target, port, stdin)
 
-
 if listen:
-    server(target, port)
+    server(target, port, up_path, execute, cmd_shell)
